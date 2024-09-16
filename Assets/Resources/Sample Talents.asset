@@ -12,34 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d377a445a84ab4fb614334bb9602a4, type: 3}
   m_Name: Sample Talents
   m_EditorClassIdentifier: 
-  items:
-  - basicInfo:
-      id: skill-efficient-i
-      name: Skill Efficient I
-      description: You use skills with 15% less cost.
-    costReductionPercent: 15
-    cooldownReductionPercent: 0
-    valueDealtIncreasePercent: 0
-    additionalProjectileCount: 0
-    rangeIncreasePercent: 0
-    fxOnUse:
-      SFX: {fileID: 8300000, guid: 9f5db610340d0704e88f6c81dcf18969, type: 3}
-      delaySFX: 1
-      VFX: {fileID: 904662820145583817, guid: 019faff12646bd8438ea56e8e7861fd8, type: 3}
-      delayVFX: 1
-    fxMode: 1
-  - basicInfo:
-      id: skill-efficient-ii
-      name: Skill Efficient II
-      description: You use skills with 25% less cost.
-    costReductionPercent: 25
-    cooldownReductionPercent: 0
-    valueDealtIncreasePercent: 0
-    additionalProjectileCount: 0
-    rangeIncreasePercent: 0
-    fxOnUse:
-      SFX: {fileID: 8300000, guid: 9f5db610340d0704e88f6c81dcf18969, type: 3}
-      delaySFX: 1
-      VFX: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}
-      delayVFX: 1
-    fxMode: 1
+  items: []

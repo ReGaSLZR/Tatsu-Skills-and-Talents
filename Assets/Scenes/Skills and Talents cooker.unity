@@ -4399,7 +4399,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.07450979, g: 0.44650406, b: 0.48235294, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.3734176, b: 0.5566038, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -16440,7 +16440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672093075}
   m_Layer: 0
-  m_Name: CAMERAS
+  m_Name: '[CAMERAS]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47005,6 +47005,62 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4887154159106792598, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752594661096312851, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752594661096312851, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666897507306887981, guid: 29e375f36256c934e9130348e60596e7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6680160918079839617, guid: 29e375f36256c934e9130348e60596e7, type: 3}
       propertyPath: m_Name
       value: Player Knight Girl
@@ -47108,6 +47164,6 @@ SceneRoots:
   - {fileID: 362208526}
   - {fileID: 245845232}
   - {fileID: 1258949828}
-  - {fileID: 2376638097162351488}
   - {fileID: 672093075}
   - {fileID: 980671717}
+  - {fileID: 2376638097162351488}

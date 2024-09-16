@@ -219,7 +219,7 @@
 
             dropdownSFX.Clear();
             inputDelayToSFX.Clear();
-            dropdownProjectileVFX.Clear();
+            dropdownVFX.Clear();
             inputDelayToVFX.Clear();
 
             dropdownAnimationState.Clear();
