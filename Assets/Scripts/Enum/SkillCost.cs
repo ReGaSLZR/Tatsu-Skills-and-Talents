@@ -1,14 +1,19 @@
-﻿[System.Serializable]
-public class SkillCost
+﻿namespace ReGaSLZR
 {
 
-    public TargetStat stat;
-    public uint cost;
-
-    public SkillCost(TargetStat stat, uint cost)
+    [System.Serializable]
+    public class SkillCost
     {
-        this.stat = stat;
-        this.cost = cost;
+
+        public TargetStat stat;
+        public uint cost;
+
+        public SkillCost(TargetStat stat, uint cost)
+        {
+            this.stat = stat;
+            this.cost = cost;
+        }
+
     }
 
 }

@@ -1,50 +1,55 @@
-﻿using System.Collections.Generic;
-using TMPro;
-using UnityEditor;
-using UnityEngine;
-
-public abstract class AbstractBank<T> : ScriptableObject where T : class
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    protected List<T> items;
+    using System.Collections.Generic;
+    using TMPro;
+    using UnityEditor;
+    using UnityEngine;
 
-    public List<T> Items => items;
-
-    public T GetSelectedItemFromDropdown(TMP_Dropdown dropdown)
+    public abstract class AbstractBank<T> : ScriptableObject where T : class
     {
-        if(dropdown == null || items.Count == 0 || dropdown.HasNoSelectedItemFromBank())
+
+        [SerializeField]
+        protected List<T> items;
+
+        public List<T> Items => items;
+
+        public T GetSelectedItemFromDropdown(TMP_Dropdown dropdown)
         {
-            return default;
-        }
-
-        var index = dropdown.GetSelectedItemIndexForBank();
-
-        return items[index];
-    }
-
-    public abstract string GetItemId(T item);
-
-    public void SaveItem(T item)
-    {
-        Debug.Log($"{GetType().Name}.SaveItem() called for item ID: {GetItemId(item)}");
-
-        foreach (var storedItem in items)
-        {
-            if (string.Equals(GetItemId(storedItem), GetItemId(item)))
+            if (dropdown == null || items.Count == 0 || dropdown.HasNoSelectedItemFromBank())
             {
-                items.Remove(storedItem);
-                items.Add(item);
-                Debug.Log($"{GetType().Name}.SaveItem() Overwrote existing item");
-                return;
+                return default;
             }
+
+            var index = dropdown.GetSelectedItemIndexForBank();
+
+            return items[index];
         }
 
-        Debug.Log($"{GetType().Name}.SaveItem() storing as new item");
-        items.Add(item);
+        public abstract string GetItemId(T item);
 
-        EditorUtility.SetDirty(this);
-        AssetDatabase.SaveAssetIfDirty(this);
+        public void SaveItem(T item)
+        {
+            Debug.Log($"{GetType().Name}.SaveItem() called for item ID: {GetItemId(item)}");
+
+            foreach (var storedItem in items)
+            {
+                if (string.Equals(GetItemId(storedItem), GetItemId(item)))
+                {
+                    items.Remove(storedItem);
+                    items.Add(item);
+                    Debug.Log($"{GetType().Name}.SaveItem() Overwrote existing item");
+                    return;
+                }
+            }
+
+            Debug.Log($"{GetType().Name}.SaveItem() storing as new item");
+            items.Add(item);
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssetIfDirty(this);
+        }
+
     }
 
 }

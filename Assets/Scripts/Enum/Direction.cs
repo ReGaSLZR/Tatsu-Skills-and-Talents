@@ -1,8 +1,13 @@
-public enum Direction
+namespace ReGaSLZR
 {
 
-	InFrontOfCaster = 0,
-	AroundCaster = 1,
-	Cross = 2,	
+	public enum Direction
+	{
+
+		InFrontOfCaster = 0,
+		AroundCaster = 1,
+		Cross = 2,
+
+	}
 
 }

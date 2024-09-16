@@ -1,208 +1,224 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class UITalentForm : MonoBehaviour
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private Button buttonSave;
+    using System;
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    [SerializeField]
-    private Button buttonRemove;
-
-    [Space]
-
-    [SerializeField]
-    private TMP_Dropdown dropdownTalents;
-
-    [Space]
-
-    [SerializeField]
-    private TMP_InputField inputID;
-
-    [SerializeField]
-    private TMP_InputField inputName;
-
-    [SerializeField]
-    private TMP_InputField inputDescription;
-
-    [SerializeField]
-    private TMP_InputField inputCostReductionPercent;
-
-    [SerializeField]
-    private TMP_InputField inputCooldownReductionPercent;
-
-    [SerializeField]
-    private TMP_InputField inputValueDealtIncreasePercent;
-
-    [SerializeField]
-    private TMP_InputField inputRangeIncreasePercent;
-
-    [Space]
-
-    [SerializeField]
-    private TMP_InputField inputAdditionalProjectileCount;
-
-    [Space]
-
-    [SerializeField]
-    private TMP_Dropdown dropdownSFX;
-
-    [SerializeField]
-    private TMP_InputField inputDelaySFX;
-
-    [SerializeField]
-    private TMP_Dropdown dropdownVFX;
-
-    [SerializeField]
-    private TMP_InputField inputDelayVFX;
-
-    [Space]
-
-    [SerializeField]
-    private TMP_Dropdown dropdownFXMode;
-
-    private void Awake()
+    public class UITalentForm : MonoBehaviour
     {
-        ResetUI();
-        buttonSave.onClick.AddListener(SaveTalent);
-        dropdownTalents.onValueChanged.AddListener(_ => LoadTalent());
 
-        UIBanksChooserSingleton.Instance.RegisterOnLoadBanks(PopulateDropdowns);
-    }
+        [SerializeField]
+        private Button buttonSave;
 
-    public void RemoveSubscriptions()
-    {
-        UIBanksChooserSingleton.Instance.UnregisterOnLoadBanks(PopulateDropdowns);
-    }
+        [SerializeField]
+        private Button buttonRemove;
 
-    public void RegisterOnRemove(Action<UITalentForm> onRemove)
-    {
-        if (onRemove == null)
-        {
-            return;
-        }
+        [Space]
 
-        buttonRemove.onClick.AddListener(() => onRemove.Invoke(this));
-    }
+        [SerializeField]
+        private TMP_Dropdown dropdownTalents;
 
-    public void ResetUI()
-    {
-        dropdownTalents.Clear();
+        [Space]
 
-        inputID.Clear();
-        inputName.Clear();
-        inputDescription.Clear();
+        [SerializeField]
+        private TMP_InputField inputID;
 
-        inputCostReductionPercent.Clear();
-        inputCooldownReductionPercent.Clear();
-        inputValueDealtIncreasePercent.Clear();
-        inputRangeIncreasePercent.Clear();
+        [SerializeField]
+        private TMP_InputField inputName;
 
-        inputAdditionalProjectileCount.Clear();
+        [SerializeField]
+        private TMP_InputField inputDescription;
 
-        dropdownSFX.Clear();
-        inputDelaySFX.Clear();
-        dropdownVFX.Clear();
-        inputDelayVFX.Clear();
+        [SerializeField]
+        private TMP_InputField inputCostReductionPercent;
 
-        dropdownFXMode.Clear();
-    }
+        [SerializeField]
+        private TMP_InputField inputCooldownReductionPercent;
 
-    public void PopulateDropdowns()
-    {
-        UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
-            UIBanksChooserSingleton.Instance.GetBankTalent(),
-            new TMP_Dropdown[] { dropdownTalents });
+        [SerializeField]
+        private TMP_InputField inputValueDealtIncreasePercent;
 
-        UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
-            UIBanksChooserSingleton.Instance.GetBankSFX(), 
-            new TMP_Dropdown[] { dropdownSFX });
+        [SerializeField]
+        private TMP_InputField inputRangeIncreasePercent;
 
-        UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
-            UIBanksChooserSingleton.Instance.GetBankVFX(),
-            new TMP_Dropdown[] { dropdownVFX });
-    }
+        [Space]
 
-    public Talent GetTalentFromUI()
-    { 
-        var talent = new Talent();
+        [SerializeField]
+        private TMP_InputField inputAdditionalProjectileCount;
 
-        talent.basicInfo = new BasicInfo(
-            inputID.text, inputName.text, 
-            inputDescription.text);
+        [Space]
 
-        talent.costReductionPercent = uint.Parse(
-            inputCostReductionPercent.text.ToString());
-        talent.cooldownReductionPercent = uint.Parse(
-            inputCooldownReductionPercent.text.ToString());
+        [SerializeField]
+        private TMP_Dropdown dropdownSFX;
 
-        talent.valueDealtIncreasePercent = uint.Parse(
-            inputValueDealtIncreasePercent.text.ToString());
-        talent.rangeIncreasePercent = uint.Parse(
-            inputRangeIncreasePercent.text.ToString());
-        talent.additionalProjectileCount = uint.Parse(
-            inputAdditionalProjectileCount.text.ToString());
+        [SerializeField]
+        private TMP_InputField inputDelaySFX;
 
-        var fxSettings = new FXSettings(
-            UIBanksChooserSingleton.Instance.GetBankSFX()
-                .GetSelectedItemFromDropdown(dropdownSFX),
-            float.Parse(inputDelaySFX.text),
-            UIBanksChooserSingleton.Instance.GetBankVFX()
-                .GetSelectedItemFromDropdown(dropdownVFX),
-            float.Parse(inputDelayVFX.text));
+        [SerializeField]
+        private TMP_Dropdown dropdownVFX;
 
-        talent.fxOnUse = fxSettings;
-        talent.fxMode = dropdownFXMode.GetEnumValue<FXMode>();
+        [SerializeField]
+        private TMP_InputField inputDelayVFX;
 
-        return talent;
-    }
+        [Space]
 
-    private void LoadTalent()
-    { 
-        if(dropdownTalents.HasNoSelectedItemFromBank())
+        [SerializeField]
+        private TMP_Dropdown dropdownFXMode;
+
+        private void Awake()
         {
             ResetUI();
-            return;
+            buttonSave.onClick.AddListener(SaveTalent);
+            dropdownTalents.onValueChanged.AddListener(_ => LoadTalent());
+
+            UIBanksChooserSingleton.Instance.RegisterOnLoadBanks(PopulateDropdowns);
         }
 
-        var talent = UIBanksChooserSingleton.Instance
-            .GetBankTalent().GetSelectedItemFromDropdown(dropdownTalents);
+        public void RemoveSubscriptions()
+        {
+            UIBanksChooserSingleton.Instance.UnregisterOnLoadBanks(PopulateDropdowns);
+        }
 
-        var bankVFX = UIBanksChooserSingleton.Instance.GetBankVFX();
-        var bankSFX = UIBanksChooserSingleton.Instance.GetBankSFX();
+        public void RegisterOnRemove(Action<UITalentForm> onRemove)
+        {
+            if (onRemove == null)
+            {
+                return;
+            }
 
-        inputID.text = talent.basicInfo.id;
-        inputName.text = talent.basicInfo.name;
-        inputDescription.text = talent.basicInfo.description;
+            buttonRemove.onClick.AddListener(() => onRemove.Invoke(this));
+        }
 
-        inputCostReductionPercent.text = talent.costReductionPercent.ToString();
-        inputCooldownReductionPercent.text = talent.cooldownReductionPercent.ToString();
-        inputValueDealtIncreasePercent.text = talent.valueDealtIncreasePercent.ToString();
-        inputRangeIncreasePercent.text = talent.rangeIncreasePercent.ToString();
+        public void ResetUI()
+        {
+            dropdownTalents.Clear();
 
-        inputAdditionalProjectileCount.text = talent.additionalProjectileCount.ToString();
+            inputID.Clear();
+            inputName.Clear();
+            inputDescription.Clear();
 
-        dropdownSFX.SetSelectedItemIndexFromBank(bankSFX.GetItemId(talent.fxOnUse.SFX));
-        inputDelaySFX.text = talent.fxOnUse.delaySFX.ToString();
-        dropdownVFX.SetSelectedItemIndexFromBank(bankVFX.GetItemId(talent.fxOnUse.VFX));
-        inputDelayVFX.text = talent.fxOnUse.delayVFX.ToString();
+            inputCostReductionPercent.Clear();
+            inputCooldownReductionPercent.Clear();
+            inputValueDealtIncreasePercent.Clear();
+            inputRangeIncreasePercent.Clear();
 
-        dropdownFXMode.SetToOption(talent.fxMode.ToString());
-    }
+            inputAdditionalProjectileCount.Clear();
 
-    private void SaveTalent()
-    {
-        var talent = GetTalentFromUI();
-        var bank = UIBanksChooserSingleton.Instance.GetBankTalent();
-        UIBanksChooserSingleton.Instance.GetBankTalent().SaveItem(talent);
+            dropdownSFX.Clear();
+            inputDelaySFX.Clear();
+            dropdownVFX.Clear();
+            inputDelayVFX.Clear();
 
-        UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
-            bank, new TMP_Dropdown[] { dropdownTalents });
+            dropdownFXMode.Clear();
+        }
 
-        ResetUI();
+        public void PopulateDropdowns()
+        {
+            UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
+                UIBanksChooserSingleton.Instance.GetBankTalent(),
+                new TMP_Dropdown[] { dropdownTalents });
+
+            UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
+                UIBanksChooserSingleton.Instance.GetBankSFX(),
+                new TMP_Dropdown[] { dropdownSFX });
+
+            UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
+                UIBanksChooserSingleton.Instance.GetBankVFX(),
+                new TMP_Dropdown[] { dropdownVFX });
+        }
+
+        public Talent GetTalentFromUI()
+        {
+            var talent = new Talent();
+
+            talent.basicInfo = new BasicInfo(
+                inputID.text, inputName.text,
+                inputDescription.text);
+
+            talent.costReductionPercent = uint.Parse(
+                inputCostReductionPercent.text.ToString());
+            talent.cooldownReductionPercent = uint.Parse(
+                inputCooldownReductionPercent.text.ToString());
+
+            talent.valueDealtIncreasePercent = uint.Parse(
+                inputValueDealtIncreasePercent.text.ToString());
+            talent.rangeIncreasePercent = uint.Parse(
+                inputRangeIncreasePercent.text.ToString());
+            talent.additionalProjectileCount = uint.Parse(
+                inputAdditionalProjectileCount.text.ToString());
+
+            var fxSettings = new FXSettings(
+                UIBanksChooserSingleton.Instance.GetBankSFX()
+                    .GetSelectedItemFromDropdown(dropdownSFX),
+                float.Parse(inputDelaySFX.text),
+                UIBanksChooserSingleton.Instance.GetBankVFX()
+                    .GetSelectedItemFromDropdown(dropdownVFX),
+                float.Parse(inputDelayVFX.text));
+
+            talent.fxOnUse = fxSettings;
+            talent.fxMode = dropdownFXMode.GetEnumValue<FXMode>();
+
+            return talent;
+        }
+
+        private void LoadTalent()
+        {
+            if (dropdownTalents.HasNoSelectedItemFromBank())
+            {
+                ResetUI();
+                return;
+            }
+
+            var talent = UIBanksChooserSingleton.Instance
+                .GetBankTalent().GetSelectedItemFromDropdown(dropdownTalents);
+
+            var bankVFX = UIBanksChooserSingleton.Instance.GetBankVFX();
+            var bankSFX = UIBanksChooserSingleton.Instance.GetBankSFX();
+
+            inputID.text = talent.basicInfo.id;
+            inputName.text = talent.basicInfo.name;
+            inputDescription.text = talent.basicInfo.description;
+
+            inputCostReductionPercent.text = talent.costReductionPercent.ToString();
+            inputCooldownReductionPercent.text = talent.cooldownReductionPercent.ToString();
+            inputValueDealtIncreasePercent.text = talent.valueDealtIncreasePercent.ToString();
+            inputRangeIncreasePercent.text = talent.rangeIncreasePercent.ToString();
+
+            inputAdditionalProjectileCount.text = talent.additionalProjectileCount.ToString();
+
+            dropdownSFX.SetSelectedItemIndexFromBank(bankSFX.GetItemId(talent.fxOnUse.SFX));
+            inputDelaySFX.text = talent.fxOnUse.delaySFX.ToString();
+            dropdownVFX.SetSelectedItemIndexFromBank(bankVFX.GetItemId(talent.fxOnUse.VFX));
+            inputDelayVFX.text = talent.fxOnUse.delayVFX.ToString();
+
+            dropdownFXMode.SetToOption(talent.fxMode.ToString());
+        }
+
+        private void SaveTalent()
+        {
+            var talent = GetTalentFromUI();
+
+            if (string.IsNullOrEmpty(talent.basicInfo.id))
+            {
+                UIPopupMessageSingleton.Instance.ShowMessage(
+                    StringConstants.MESSAGE_MISSING_ID);
+                return;
+            }
+
+            var bank = UIBanksChooserSingleton.Instance.GetBankTalent();
+            UIBanksChooserSingleton.Instance.GetBankTalent().SaveItem(talent);
+
+            UIDropdownsPopulatorSingleton.Instance.PopulateDropdownsWithBank(
+                bank, new TMP_Dropdown[] { dropdownTalents });
+
+            ResetUI();
+
+            UIPopupMessageSingleton.Instance.ShowMessage(
+                StringConstants.MESSAGE_SAVE_SUCCESS);
+        }
+
     }
 
 }

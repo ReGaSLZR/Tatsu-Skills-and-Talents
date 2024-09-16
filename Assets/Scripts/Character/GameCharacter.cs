@@ -1,68 +1,73 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-public class GameCharacter : MonoBehaviour
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private CharacterStatsHolder statsHolder;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    [SerializeField]
-    private Slider sliderHealth;
-
-    [SerializeField]
-    private Slider sliderMana;
-
-    public void ApplyStatChange(
-        TargetEffect effect, TargetStat stat, int valueDealt)
+    public class GameCharacter : MonoBehaviour
     {
-        switch (stat)
+
+        [SerializeField]
+        private CharacterStatsHolder statsHolder;
+
+        [SerializeField]
+        private Slider sliderHealth;
+
+        [SerializeField]
+        private Slider sliderMana;
+
+        public void ApplyStatChange(
+            TargetEffect effect, TargetStat stat, int valueDealt)
         {
-            case TargetStat.Health:
-                {
-                    if (TargetEffect.Damage == effect)
+            switch (stat)
+            {
+                case TargetStat.Health:
                     {
-                        statsHolder.Stats.health = CharacterStats.GetClampedStatValue(
-                            (int)statsHolder.Stats.health - valueDealt);
-                    }
-                    else if (TargetEffect.Heal == effect)
-                    {
-                        statsHolder.Stats.health = CharacterStats.GetClampedStatValue(
-                            (int)statsHolder.Stats.health + valueDealt);
-                    }
+                        if (TargetEffect.Damage == effect)
+                        {
+                            statsHolder.Stats.health = CharacterStats.GetClampedStatValue(
+                                (int)statsHolder.Stats.health - valueDealt);
+                        }
+                        else if (TargetEffect.Heal == effect)
+                        {
+                            statsHolder.Stats.health = CharacterStats.GetClampedStatValue(
+                                (int)statsHolder.Stats.health + valueDealt);
+                        }
 
-                    break;
-                }
-            case TargetStat.Mana:
-                {
-                    if (TargetEffect.Damage == effect)
-                    {
-                        statsHolder.Stats.mana = CharacterStats.GetClampedStatValue(
-                            (int)statsHolder.Stats.mana - valueDealt);
+                        break;
                     }
-                    else if (TargetEffect.Heal == effect)
+                case TargetStat.Mana:
                     {
-                        statsHolder.Stats.mana = CharacterStats.GetClampedStatValue(
-                            (int)statsHolder.Stats.mana + valueDealt);
-                    }
+                        if (TargetEffect.Damage == effect)
+                        {
+                            statsHolder.Stats.mana = CharacterStats.GetClampedStatValue(
+                                (int)statsHolder.Stats.mana - valueDealt);
+                        }
+                        else if (TargetEffect.Heal == effect)
+                        {
+                            statsHolder.Stats.mana = CharacterStats.GetClampedStatValue(
+                                (int)statsHolder.Stats.mana + valueDealt);
+                        }
 
-                    break;
-                }
-            default:
-                {
-                    Debug.LogWarning($"{GetType().Name} cannot apply stat changes " +
-                        $"to stat {stat}");
-                    break;
-                }
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogWarning($"{GetType().Name} cannot apply stat changes " +
+                            $"to stat {stat}");
+                        break;
+                    }
+            }
+
+            sliderHealth.value = statsHolder.Stats.health;
+            sliderMana.value = statsHolder.Stats.mana;
+
+            if (statsHolder.Stats.health == NumberConstants.STAT_VALUE_MIN)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        sliderHealth.value = statsHolder.Stats.health;
-        sliderMana.value = statsHolder.Stats.mana;
-
-        if (statsHolder.Stats.health == NumberConstants.STAT_VALUE_MIN)
-        {
-            Destroy(gameObject);
-        }
     }
 
 }

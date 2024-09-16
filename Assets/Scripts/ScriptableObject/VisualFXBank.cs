@@ -1,17 +1,22 @@
-﻿using UnityEngine;
-
-[CreateAssetMenu(fileName = "New VFX Bank", menuName = StringConstants.SO_MENU + "VFX Bank")]
-public class VisualFXBank : AbstractBank<GameObject>
+﻿namespace ReGaSLZR
 {
 
-    public override string GetItemId(GameObject item)
+    using UnityEngine;
+
+    [CreateAssetMenu(fileName = "New VFX Bank",
+            menuName = StringConstants.SO_MENU + "VFX Bank")]
+    public class VisualFXBank : AbstractBank<GameObject>
     {
-        if (item == null)
+
+        public override string GetItemId(GameObject item)
         {
-            return string.Empty;
+            if (item == null)
+            {
+                return string.Empty;
+            }
+
+            return item.name;
         }
 
-        return item.name;
     }
-
 }

@@ -1,23 +1,28 @@
-﻿using UnityEngine;
-
-[System.Serializable]
-public class BasicInfo
+﻿namespace ReGaSLZR
 {
 
-    public string id;
-    public string name;
+    using UnityEngine;
 
-    [Multiline]
-    public string description;
+    [System.Serializable]
+    public class BasicInfo
+    {
 
-    //TODO ren
-    //public Sprite logo;
+        public string id;
+        public string name;
 
-    public BasicInfo(string id, string name, string description)
-    { 
-        this.id = id;
-        this.name = name;
-        this.description = description;
+        [Multiline]
+        public string description;
+
+        //TODO ren
+        //public Sprite logo;
+
+        public BasicInfo(string id, string name, string description)
+        {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+        }
+
     }
 
 }

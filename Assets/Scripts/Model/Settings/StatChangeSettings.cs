@@ -1,15 +1,19 @@
-﻿[System.Serializable]
-public class StatChangeSettings
+﻿namespace ReGaSLZR
 {
 
-    public TargetSettings targetSettings;
-    public ProjectileSettings projectileSettings;
+    [System.Serializable]
+    public class StatChangeSettings
+    {
 
-    public StatChangeSettings(TargetSettings targetSettings, 
-        ProjectileSettings projectileSettings)
-    { 
-        this.targetSettings = targetSettings; 
-        this.projectileSettings = projectileSettings;
+        public TargetSettings targetSettings;
+        public ProjectileSettings projectileSettings;
+
+        public StatChangeSettings(TargetSettings targetSettings,
+            ProjectileSettings projectileSettings)
+        {
+            this.targetSettings = targetSettings;
+            this.projectileSettings = projectileSettings;
+        }
+
     }
-
 }

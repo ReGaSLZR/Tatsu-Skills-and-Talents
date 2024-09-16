@@ -1,11 +1,16 @@
-﻿using UnityEngine;
-
-public class CharacterStatsHolder : MonoBehaviour
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private CharacterStats stats;
+    using UnityEngine;
 
-    public CharacterStats Stats => stats;
+    public class CharacterStatsHolder : MonoBehaviour
+    {
+
+        [SerializeField]
+        private CharacterStats stats;
+
+        public CharacterStats Stats => stats;
+
+    }
 
 }

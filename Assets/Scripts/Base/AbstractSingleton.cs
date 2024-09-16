@@ -1,62 +1,66 @@
-﻿using UnityEngine;
-
-
-public abstract class AbstractSingleton<T> : MonoBehaviour
-    where T : MonoBehaviour
+﻿namespace ReGaSLZR
 {
 
-    #region Singleton Instance
+    using UnityEngine;
 
-    private static readonly object lockObject = new object();
-    private static T instance;
-    public static T Instance
+    public abstract class AbstractSingleton<T> : MonoBehaviour
+        where T : MonoBehaviour
     {
-        get
+
+        #region Singleton Instance
+
+        private static readonly object lockObject = new object();
+        private static T instance;
+        public static T Instance
         {
-            lock (lockObject)
+            get
             {
-                if (instance == null)
+                lock (lockObject)
                 {
-                    instance = FindObjectOfType<T>();
+                    if (instance == null)
+                    {
+                        instance = FindObjectOfType<T>();
+                    }
+
+                    return instance;
                 }
-
-                return instance;
             }
         }
-    }
 
-    #endregion
+        #endregion
 
-    [SerializeField]
-    private bool isDontDestroyOnLoad;
+        [SerializeField]
+        private bool isDontDestroyOnLoad;
 
-    protected virtual void Awake()
-    {
-        InitSingleton();
-    }
-
-    #region Class Implementation
-
-    private void InitSingleton()
-    {
-        if (Instance.GetInstanceID() == GetInstanceID())
+        protected virtual void Awake()
         {
-            Debug.Log($"{gameObject.name}.{GetType().Name}.Awake(): " +
-                $"Accepted as singleton.");
+            InitSingleton();
+        }
 
-            if (isDontDestroyOnLoad)
+        #region Class Implementation
+
+        private void InitSingleton()
+        {
+            if (Instance.GetInstanceID() == GetInstanceID())
             {
-                DontDestroyOnLoad(gameObject);
+                Debug.Log($"{gameObject.name}.{GetType().Name}.Awake(): " +
+                    $"Accepted as singleton.");
+
+                if (isDontDestroyOnLoad)
+                {
+                    DontDestroyOnLoad(gameObject);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"{gameObject.name}.{GetType().Name}.Awake(): " +
+                    $"Cannot have >1 Instances of this class. Destroying...");
+                Destroy(gameObject);
             }
         }
-        else
-        {
-            Debug.LogWarning($"{gameObject.name}.{GetType().Name}.Awake(): " +
-                $"Cannot have >1 Instances of this class. Destroying...");
-            Destroy(gameObject);
-        }
-    }
 
-    #endregion
+        #endregion
+
+    }
 
 }

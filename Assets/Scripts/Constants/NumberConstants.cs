@@ -1,9 +1,14 @@
-﻿public static class NumberConstants
+﻿namespace ReGaSLZR
 {
 
-    public const int STAT_VALUE_MIN = 0;
-    public const int STAT_VALUE_MAX = 100;
+    public static class NumberConstants
+    {
 
-    public const float WHOLE_NUMBER_PERCENT_DIVISOR = 100f;
+        public const int STAT_VALUE_MIN = 0;
+        public const int STAT_VALUE_MAX = 100;
+
+        public const float WHOLE_NUMBER_PERCENT_DIVISOR = 100f;
+
+    }
 
 }

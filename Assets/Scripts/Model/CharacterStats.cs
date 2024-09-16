@@ -1,18 +1,23 @@
-﻿using UnityEngine;
-
-[System.Serializable]
-public class CharacterStats
+﻿namespace ReGaSLZR
 {
 
-    public uint health = NumberConstants.STAT_VALUE_MAX;
-    public uint mana = NumberConstants.STAT_VALUE_MAX;
+    using UnityEngine;
 
-    public float walkSpeed = 5f;
-
-    public static uint GetClampedStatValue(int statValue)
+    [System.Serializable]
+    public class CharacterStats
     {
-        return (uint)Mathf.Clamp(statValue,
-            NumberConstants.STAT_VALUE_MIN, NumberConstants.STAT_VALUE_MAX);
+
+        public uint health = NumberConstants.STAT_VALUE_MAX;
+        public uint mana = NumberConstants.STAT_VALUE_MAX;
+
+        public float walkSpeed = 5f;
+
+        public static uint GetClampedStatValue(int statValue)
+        {
+            return (uint)Mathf.Clamp(statValue,
+                NumberConstants.STAT_VALUE_MIN, NumberConstants.STAT_VALUE_MAX);
+        }
+
     }
 
 }

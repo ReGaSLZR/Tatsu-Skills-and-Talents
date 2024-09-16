@@ -1,40 +1,45 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class AudioManagerSingleton : AbstractSingleton<AudioManagerSingleton>
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private AudioSource audioSourceSFX;
+    using System.Collections;
+    using UnityEngine;
 
-    [SerializeField]
-    private AudioSource audioSourceBGM;
-
-    public void Play(AudioClip clip, float delay, bool isSFX)
+    public class AudioManagerSingleton : AbstractSingleton<AudioManagerSingleton>
     {
-        StartCoroutine(CoroutinePlay(clip, delay, isSFX));
-    }
 
-    //TODO ren: use UniTask or asyncs
-    private IEnumerator CoroutinePlay(AudioClip clip, float delay, bool isSFX)
-    {
-        if (clip == null)
+        [SerializeField]
+        private AudioSource audioSourceSFX;
+
+        [SerializeField]
+        private AudioSource audioSourceBGM;
+
+        public void Play(AudioClip clip, float delay, bool isSFX)
         {
-            yield break;
+            StartCoroutine(CoroutinePlay(clip, delay, isSFX));
         }
 
-        yield return new WaitForSeconds(delay);
+        //TODO ren: use UniTask or asyncs
+        private IEnumerator CoroutinePlay(AudioClip clip, float delay, bool isSFX)
+        {
+            if (clip == null)
+            {
+                yield break;
+            }
 
-        if (isSFX)
-        {
-            audioSourceSFX.PlayOneShot(clip);
+            yield return new WaitForSeconds(delay);
+
+            if (isSFX)
+            {
+                audioSourceSFX.PlayOneShot(clip);
+            }
+            else
+            {
+                audioSourceBGM.Stop();
+                audioSourceBGM.clip = clip;
+                audioSourceBGM.Play();
+            }
         }
-        else
-        {
-            audioSourceBGM.Stop();
-            audioSourceBGM.clip = clip;
-            audioSourceBGM.Play();
-        }
+
     }
 
 }

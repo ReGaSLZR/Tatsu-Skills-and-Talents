@@ -1,16 +1,21 @@
-﻿using UnityEngine;
-
-[CreateAssetMenu(fileName = "New Skill Bank", menuName = StringConstants.SO_MENU + "Skill Bank")]
-public class SkillBank : AbstractBank<Skill>
+﻿namespace ReGaSLZR
 {
-    public override string GetItemId(Skill item)
+
+    using UnityEngine;
+
+    [CreateAssetMenu(fileName = "New Skill Bank",
+            menuName = StringConstants.SO_MENU + "Skill Bank")]
+    public class SkillBank : AbstractBank<Skill>
     {
-        if (item == null || item.basicInfo == null)
+        public override string GetItemId(Skill item)
         {
-            return string.Empty;
+            if (item == null || item.basicInfo == null)
+            {
+                return string.Empty;
+            }
+
+            return item.basicInfo.id;
         }
 
-        return item.basicInfo.id;
     }
-
 }

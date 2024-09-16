@@ -1,19 +1,24 @@
-﻿using TMPro;
-
-public static class TMP_InputFieldExtensions
+﻿namespace ReGaSLZR
 {
 
-    public static void Clear(this TMP_InputField input)
+    using TMPro;
+
+    public static class TMP_InputFieldExtensions
     {
-        if (input.contentType == TMP_InputField.ContentType.IntegerNumber
-            || input.contentType == TMP_InputField.ContentType.DecimalNumber)
+
+        public static void Clear(this TMP_InputField input)
         {
-            input.text = "0";
+            if (input.contentType == TMP_InputField.ContentType.IntegerNumber
+                || input.contentType == TMP_InputField.ContentType.DecimalNumber)
+            {
+                input.text = "0";
+            }
+            else
+            {
+                input.text = string.Empty;
+            }
         }
-        else
-        {
-            input.text = string.Empty;
-        }
+
     }
 
 }

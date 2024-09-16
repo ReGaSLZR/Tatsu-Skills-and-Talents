@@ -1,72 +1,77 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class UIToTalentTranslatorSingleton : AbstractSingleton<UIToTalentTranslatorSingleton>
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private Button buttonAddTalent;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    [SerializeField]
-    private ScrollRect scroller;
-
-    [SerializeField]
-    private GameObject displayNoTalentsMessage;
-
-    [Space]
-
-    [SerializeField]
-    private UITalentForm prefabTalentForm;
-
-    [SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
-    private List<UITalentForm> listTalentForms;
-
-    protected override void Awake()
+    public class UIToTalentTranslatorSingleton : AbstractSingleton<UIToTalentTranslatorSingleton>
     {
-        base.Awake();
 
-        listTalentForms = new List<UITalentForm>();
-        buttonAddTalent.onClick.AddListener(AddNewTalentForm);
-    }
+        [SerializeField]
+        private Button buttonAddTalent;
 
-    private void Start()
-    {
-        scroller.normalizedPosition = new Vector2(0, 1);
-        displayNoTalentsMessage.SetActive(true);
-    }
+        [SerializeField]
+        private ScrollRect scroller;
 
-    public Talent[] GetTalentsFromUIValue()
-    { 
-        var listTalents = new List<Talent>();
+        [SerializeField]
+        private GameObject displayNoTalentsMessage;
 
-        foreach (var form in listTalentForms)
+        [Space]
+
+        [SerializeField]
+        private UITalentForm prefabTalentForm;
+
+        //[SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
+        private List<UITalentForm> listTalentForms;
+
+        protected override void Awake()
         {
-            listTalents.Add(form.GetTalentFromUI());
+            base.Awake();
+
+            listTalentForms = new List<UITalentForm>();
+            buttonAddTalent.onClick.AddListener(AddNewTalentForm);
         }
 
-        return listTalents.ToArray();
-    }
+        private void Start()
+        {
+            scroller.normalizedPosition = new Vector2(0, 1);
+            displayNoTalentsMessage.SetActive(true);
+        }
 
-    private void AddNewTalentForm()
-    {
-        var newForm = Instantiate(prefabTalentForm, scroller.content);
+        public Talent[] GetTalentsFromUIValue()
+        {
+            var listTalents = new List<Talent>();
 
-        newForm.RegisterOnRemove(RemoveTalentForm);
-        newForm.PopulateDropdowns();
-        listTalentForms.Add(newForm);
+            foreach (var form in listTalentForms)
+            {
+                listTalents.Add(form.GetTalentFromUI());
+            }
 
-        scroller.normalizedPosition = new Vector2(0, -1);
-        displayNoTalentsMessage.SetActive(false);
-    }
+            return listTalents.ToArray();
+        }
 
-    private void RemoveTalentForm(UITalentForm form)
-    { 
-        form.RemoveSubscriptions();
-        listTalentForms.Remove(form);
-        Destroy(form.gameObject);
+        private void AddNewTalentForm()
+        {
+            var newForm = Instantiate(prefabTalentForm, scroller.content);
 
-        displayNoTalentsMessage.SetActive(listTalentForms.Count == 0);
+            newForm.RegisterOnRemove(RemoveTalentForm);
+            newForm.PopulateDropdowns();
+            listTalentForms.Add(newForm);
+
+            scroller.normalizedPosition = new Vector2(0, -1);
+            displayNoTalentsMessage.SetActive(false);
+        }
+
+        private void RemoveTalentForm(UITalentForm form)
+        {
+            form.RemoveSubscriptions();
+            listTalentForms.Remove(form);
+            Destroy(form.gameObject);
+
+            displayNoTalentsMessage.SetActive(listTalentForms.Count == 0);
+        }
+
     }
 
 }

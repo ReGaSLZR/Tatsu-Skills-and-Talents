@@ -1,5 +1,10 @@
-public enum TargetStat
+namespace ReGaSLZR
 {
-	Mana = 0,
-    Health = 1,
+
+    public enum TargetStat
+    {
+        Mana = 0,
+        Health = 1,
+    }
+
 }

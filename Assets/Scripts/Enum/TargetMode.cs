@@ -1,8 +1,13 @@
-public enum TargetMode
+namespace ReGaSLZR
 {
 
-	Single = 0,
-	Multi = 1,
-	Self = 2,
+	public enum TargetMode
+	{
+
+		Single = 0,
+		Multi = 1,
+		Self = 2,
+
+	}
 
 }

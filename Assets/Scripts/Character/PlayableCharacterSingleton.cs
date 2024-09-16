@@ -1,44 +1,49 @@
-﻿using UnityEngine;
-
-public class PlayableCharacterSingleton : AbstractSingleton<PlayableCharacterSingleton>
+﻿namespace ReGaSLZR
 {
 
-    //[SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
-    //private Skill testSkill;
+    using UnityEngine;
 
-    //[SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
-    //private Talent[] testTalents;
-
-    [SerializeField]
-    private CharacterStatsHolder statsHolder;
-    public CharacterStatsHolder StatsHolder => statsHolder;
-
-    [SerializeField]
-    private CharacterSkillUser skillUser;
-    public CharacterSkillUser SkillUser => skillUser;
-
-    protected override void Awake()
+    public class PlayableCharacterSingleton : AbstractSingleton<PlayableCharacterSingleton>
     {
-        base.Awake();
 
-        UISkillPreviewButtonSingleton.Instance.RegisterOnClickListener(OnUsePreviewSkill);
-    }
+        //[SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
+        //private Skill testSkill;
 
-    private void OnUsePreviewSkill()
-    {
-        Debug.Log($"{GetType().Name}.OnUsePreviewSkill()");
+        //[SerializeField] //marked readonly for Inspector debugging //TODO ren improve this
+        //private Talent[] testTalents;
 
-        var talents = UIToTalentTranslatorSingleton.Instance.GetTalentsFromUIValue();
-        var skill = UIToSkillTranslatorSingleton.Instance.GetSkillFromUIValues();
-        skill.ModifyWithTalents(talents);
+        [SerializeField]
+        private CharacterStatsHolder statsHolder;
+        public CharacterStatsHolder StatsHolder => statsHolder;
 
-        if (!skillUser.CanUseSkill(skill, statsHolder.Stats))
+        [SerializeField]
+        private CharacterSkillUser skillUser;
+        public CharacterSkillUser SkillUser => skillUser;
+
+        protected override void Awake()
         {
-            return;
+            base.Awake();
+
+            UISkillPreviewButtonSingleton.Instance.RegisterOnClickListener(OnUsePreviewSkill);
         }
 
-        UISkillPreviewButtonSingleton.Instance.ApplyCooldown(skill.coolDownInSeconds);
-        skillUser.UseSkill(skill, statsHolder.Stats);
+        private void OnUsePreviewSkill()
+        {
+            Debug.Log($"{GetType().Name}.OnUsePreviewSkill()");
+
+            var talents = UIToTalentTranslatorSingleton.Instance.GetTalentsFromUIValue();
+            var skill = UIToSkillTranslatorSingleton.Instance.GetSkillFromUIValues();
+            skill.ModifyWithTalents(talents);
+
+            if (!skillUser.CanUseSkill(skill, statsHolder.Stats))
+            {
+                return;
+            }
+
+            UISkillPreviewButtonSingleton.Instance.ApplyCooldown(skill.coolDownInSeconds);
+            skillUser.UseSkill(skill, statsHolder.Stats);
+        }
+
     }
 
 }

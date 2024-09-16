@@ -1,7 +1,12 @@
-public enum TargetEffect
+namespace ReGaSLZR
 {
-    
-	Damage = 0,
-	Heal = 1,
-	
+
+	public enum TargetEffect
+	{
+
+		Damage = 0,
+		Heal = 1,
+
+	}
+
 }

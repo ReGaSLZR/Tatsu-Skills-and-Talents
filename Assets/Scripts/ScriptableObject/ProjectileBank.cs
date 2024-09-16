@@ -1,17 +1,22 @@
-﻿using UnityEngine;
-
-[CreateAssetMenu(fileName = "New Projectile Bank", menuName = StringConstants.SO_MENU + "Projectile Bank")]
-public class ProjectileBank : AbstractBank<GameObject>
+﻿namespace ReGaSLZR
 {
 
-    public override string GetItemId(GameObject item)
+    using UnityEngine;
+
+    [CreateAssetMenu(fileName = "New Projectile Bank",
+            menuName = StringConstants.SO_MENU + "Projectile Bank")]
+    public class ProjectileBank : AbstractBank<GameObject>
     {
-        if (item == null)
+
+        public override string GetItemId(GameObject item)
         {
-            return string.Empty;
+            if (item == null)
+            {
+                return string.Empty;
+            }
+
+            return item.name;
         }
 
-        return item.name;
     }
-
 }

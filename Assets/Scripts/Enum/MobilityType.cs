@@ -1,8 +1,13 @@
-﻿public enum MobilityType
-{ 
+﻿namespace ReGaSLZR
+{
 
-    None = 0,
-    Rush = 1,
-    Teleport = 2,
+    public enum MobilityType
+    {
+
+        None = 0,
+        Rush = 1,
+        Teleport = 2,
+
+    }
 
 }

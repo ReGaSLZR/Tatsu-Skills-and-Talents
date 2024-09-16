@@ -1,80 +1,85 @@
-﻿using System;
-using System.Collections;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-
-public class UISkillPreviewButtonSingleton : AbstractSingleton<UISkillPreviewButtonSingleton> 
+﻿namespace ReGaSLZR
 {
 
-    [SerializeField]
-    private Button button;
+    using System;
+    using System.Collections;
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    [SerializeField]
-    private TextMeshProUGUI textInfo;
-
-    [Space]
-
-    [SerializeField]
-    private Color colorTextCooldown;
-
-    [SerializeField]
-    private Color colorTextNormal;
-
-    private const float checkInterval = 0.1f;
-    private WaitForSeconds cooldownCheckInterval;
-
-    protected override void Awake()
+    public class UISkillPreviewButtonSingleton : AbstractSingleton<UISkillPreviewButtonSingleton>
     {
-        base.Awake();
 
-        cooldownCheckInterval = new WaitForSeconds(checkInterval);
-    }
+        [SerializeField]
+        private Button button;
 
-    public void RegisterOnClickListener(Action onClick)
-    {
-        if (onClick == null)
+        [SerializeField]
+        private TextMeshProUGUI textInfo;
+
+        [Space]
+
+        [SerializeField]
+        private Color colorTextCooldown;
+
+        [SerializeField]
+        private Color colorTextNormal;
+
+        private const float checkInterval = 0.1f;
+        private WaitForSeconds cooldownCheckInterval;
+
+        protected override void Awake()
         {
-            return;
+            base.Awake();
+
+            cooldownCheckInterval = new WaitForSeconds(checkInterval);
         }
 
-        button.onClick.AddListener(onClick.Invoke);
-    }
-
-    public void SetTextInfo(string info)
-    { 
-        textInfo.text = info;
-    }
-
-    public void SetEnabled(bool isEnabled)
-    {
-        button.interactable = isEnabled;
-    }
-
-    public void ApplyCooldown(float cooldown)
-    {
-        StartCoroutine(CoroutineApplyCooldown(cooldown));
-    }
-
-    private IEnumerator CoroutineApplyCooldown(float cooldown)
-    {
-        var cachedText = textInfo.text;
-        var timeStart = Time.time;
-        var timeEnd = timeStart + cooldown;
-
-        SetTextInfo(cooldown.ToString());
-        SetEnabled(false);
-        textInfo.color = colorTextCooldown;
-
-        while (Time.time < timeEnd)
+        public void RegisterOnClickListener(Action onClick)
         {
-            yield return cooldownCheckInterval;
-            SetTextInfo((cooldown - (Time.time - timeStart)).ToString("F1"));
+            if (onClick == null)
+            {
+                return;
+            }
+
+            button.onClick.AddListener(onClick.Invoke);
         }
 
-        textInfo.color = colorTextNormal;
-        SetTextInfo(cachedText);
-        SetEnabled(true);
+        public void SetTextInfo(string info)
+        {
+            textInfo.text = info;
+        }
+
+        public void SetEnabled(bool isEnabled)
+        {
+            button.interactable = isEnabled;
+        }
+
+        public void ApplyCooldown(float cooldown)
+        {
+            StartCoroutine(CoroutineApplyCooldown(cooldown));
+        }
+
+        private IEnumerator CoroutineApplyCooldown(float cooldown)
+        {
+            var cachedText = textInfo.text;
+            var timeStart = Time.time;
+            var timeEnd = timeStart + cooldown;
+
+            SetTextInfo(cooldown.ToString());
+            SetEnabled(false);
+            textInfo.color = colorTextCooldown;
+
+            while (Time.time < timeEnd)
+            {
+                yield return cooldownCheckInterval;
+                SetTextInfo((cooldown - (Time.time - timeStart)).ToString("F1"));
+            }
+
+            textInfo.color = colorTextNormal;
+            SetTextInfo(cachedText);
+            SetEnabled(true);
+        }
+
     }
 
 }

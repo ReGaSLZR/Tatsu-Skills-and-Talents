@@ -1,10 +1,14 @@
-﻿[System.Serializable]
-public class MobilitySettings
+﻿namespace ReGaSLZR
 {
 
-    public MobilityType type;
-    public uint range;
-    public float speed;
-    public float delay;
+    [System.Serializable]
+    public class MobilitySettings
+    {
 
+        public MobilityType type;
+        public uint range;
+        public float speed;
+        public float delay;
+
+    }
 }

@@ -1,8 +1,12 @@
-﻿public enum FXMode
-{ 
+﻿namespace ReGaSLZR
+{
 
-    Override = 0,
-    Additional = 1,
+    public enum FXMode
+    {
 
+        Override = 0,
+        Additional = 1,
+
+    }
 
 }
