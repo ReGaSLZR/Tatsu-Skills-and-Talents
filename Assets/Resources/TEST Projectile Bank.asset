@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae553c2e79a67344a2e91af29b9126b, type: 3}
+  m_Name: TEST Projectile Bank
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+  - {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}

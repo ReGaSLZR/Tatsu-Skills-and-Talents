@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cc3ff9b879b6d47a35fa475a9fa422, type: 3}
+  m_Name: Char Knight Girl Skills Animation States
+  m_EditorClassIdentifier: 
+  items:
+  - Attack1
+  - Attack2
+  - Attack3
+  - Attack4
+  - Dash
+  - PowerUp
+  - Block
