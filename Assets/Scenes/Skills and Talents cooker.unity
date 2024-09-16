@@ -6781,7 +6781,6 @@ MonoBehaviour:
   scroller: {fileID: 621889713}
   displayNoTalentsMessage: {fileID: 1819318825}
   prefabTalentForm: {fileID: 7110849976962702921, guid: 681a74f6675f7bf47816638fef86206b, type: 3}
-  listTalentForms: []
 --- !u!114 &245845236
 MonoBehaviour:
   m_ObjectHideFlags: 0
