@@ -10,15 +10,22 @@
         [SerializeField]
         private CharacterStatsHolder statsHolder;
 
+        [Space]
+
         [SerializeField]
         private Slider sliderHealth;
 
         [SerializeField]
         private Slider sliderMana;
 
+        [SerializeField]
+        private UICharacterStatChange uiStatChange;
+
         public void ApplyStatChange(
             TargetEffect effect, TargetStat stat, int valueDealt)
         {
+            uiStatChange.PlayStatChange((uint)valueDealt, stat, effect);
+
             switch (stat)
             {
                 case TargetStat.Health:

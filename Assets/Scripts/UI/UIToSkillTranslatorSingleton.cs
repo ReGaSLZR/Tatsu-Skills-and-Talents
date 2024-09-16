@@ -66,6 +66,9 @@
         [SerializeField]
         private TMP_InputField inputValueDealt;
 
+        [SerializeField]
+        private TMP_InputField inputDelayDealValue;
+
         [Space]
 
         [SerializeField]
@@ -146,6 +149,7 @@
             dropdownTargetEffect.SetToOption(skill.statChangeSettings.targetSettings.effect.ToString());
             inputRange.text = skill.statChangeSettings.targetSettings.range.ToString();
             inputValueDealt.text = skill.statChangeSettings.targetSettings.valueDealtToTarget.ToString();
+            inputDelayDealValue.text = skill.statChangeSettings.targetSettings.delayDealValue.ToString();
 
             dropdownProjectile.SetSelectedItemIndexFromBank(
                 bankProjectile.GetItemId(skill.statChangeSettings.projectileSettings.prefab));
@@ -206,6 +210,7 @@
             dropdownTargetEffect.Clear();
             inputRange.Clear();
             inputValueDealt.Clear();
+            inputDelayDealValue.Clear();
 
             dropdownProjectile.Clear();
             inputSpawnCount.Clear();
@@ -240,7 +245,8 @@
                 dropdownStatAffected.GetEnumValue<TargetStat>(),
                 dropdownTargetEffect.GetEnumValue<TargetEffect>(),
                 float.Parse(inputRange.text),
-                uint.Parse(inputValueDealt.text));
+                uint.Parse(inputValueDealt.text),
+                float.Parse(inputDelayDealValue.text));
 
             var projectileSettings = new ProjectileSettings(
                 UIBanksChooserSingleton.Instance.GetBankProjectile()

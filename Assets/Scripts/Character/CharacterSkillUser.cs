@@ -3,21 +3,14 @@
 
     using System.Collections;
     using System.Collections.Generic;
+    using UnityEditor.Experimental.GraphView;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class CharacterSkillUser : MonoBehaviour
     {
 
-        [Header("UI Elements")]
-
         [SerializeField]
-        private Slider sliderHealth;
-
-        [SerializeField]
-        private Slider sliderMana;
-
-        [Header("General Elements")]
+        private GameCharacter character;
 
         [SerializeField]
         private Animator animator;
@@ -62,8 +55,10 @@
 
         public void UseSkill(Skill skill, CharacterStats stats)
         {
-            ApplySkillCostToSelf(skill.cost, stats);
-            ApplyStatChangesFromSkill(skill.statChangeSettings, stats);
+            character.ApplyStatChange(TargetEffect.Damage, skill.cost.stat, (int)skill.cost.cost);
+
+            StartCoroutine(CoroutineApplyStatChangesFromSkill(
+                skill.statChangeSettings, stats));
             ApplyFXSettingsFromSkill(skill.fxOnUse, skill.AdditionalFXSettings);
 
             if (!StringConstants.DROPDOWN_UNSET.Equals(
@@ -95,19 +90,24 @@
             StartCoroutine(CoroutinePlayVFX(fx));
         }
 
-        private void ApplyStatChangesFromSkill(
+        private IEnumerator CoroutineApplyStatChangesFromSkill(
             StatChangeSettings settings, CharacterStats ownStats)
         {
             if (settings == null)
             {
-                return;
+                yield break;
             }
+
+            yield return new WaitForSeconds(settings.targetSettings.delayDealValue);
 
             switch (settings.targetSettings.mode)
             {
                 case TargetMode.Self:
                     {
-                        ApplyStatChangeToSelf(settings, ownStats);
+                        character.ApplyStatChange(
+                            settings.targetSettings.effect,
+                            settings.targetSettings.stat, 
+                            (int)settings.targetSettings.valueDealtToTarget);
                         break;
                     }
                 case TargetMode.Single:
@@ -173,89 +173,6 @@
                     settings.targetSettings.effect, settings.targetSettings.stat,
                     (int)settings.targetSettings.valueDealtToTarget);
             }
-        }
-
-        private void ApplyStatChangeToSelf(
-            StatChangeSettings settings, CharacterStats ownStats)
-        {
-            var valueDealt = (int)settings.targetSettings.valueDealtToTarget;
-
-            switch (settings.targetSettings.stat)
-            {
-                case TargetStat.Health:
-                    {
-                        if (TargetEffect.Damage == settings.targetSettings.effect)
-                        {
-                            ownStats.health = CharacterStats.GetClampedStatValue(
-                                (int)ownStats.health - valueDealt);
-                        }
-                        else if (TargetEffect.Heal == settings.targetSettings.effect)
-                        {
-                            ownStats.health = CharacterStats.GetClampedStatValue(
-                                (int)ownStats.health + valueDealt);
-                        }
-
-                        break;
-                    }
-                case TargetStat.Mana:
-                    {
-                        if (TargetEffect.Damage == settings.targetSettings.effect)
-                        {
-                            ownStats.mana = CharacterStats.GetClampedStatValue(
-                                (int)ownStats.mana - valueDealt);
-                        }
-                        else if (TargetEffect.Heal == settings.targetSettings.effect)
-                        {
-                            ownStats.mana = CharacterStats.GetClampedStatValue(
-                                (int)ownStats.mana + valueDealt);
-                        }
-
-                        break;
-                    }
-                default:
-                    {
-                        Debug.LogWarning($"{GetType().Name} cannot apply stat changes " +
-                            $"to stat {settings.targetSettings.stat}");
-                        break;
-                    }
-            }
-
-            sliderHealth.value = ownStats.health;
-            sliderMana.value = ownStats.mana;
-        }
-
-        private void ApplySkillCostToSelf(
-            SkillCost skillCost, CharacterStats stats)
-        {
-            if (skillCost == null)
-            {
-                return;
-            }
-
-            switch (skillCost.stat)
-            {
-                case TargetStat.Mana:
-                    {
-                        stats.mana = CharacterStats.GetClampedStatValue(
-                            (int)stats.mana - (int)skillCost.cost);
-                        break;
-                    }
-                case TargetStat.Health:
-                    {
-                        stats.health = CharacterStats.GetClampedStatValue(
-                            (int)stats.health - (int)skillCost.cost);
-                        break;
-                    }
-                default:
-                    {
-                        Debug.LogWarning($"{GetType().Name} cannot apply " +
-                            $"cost to stat {skillCost.stat}");
-                        break;
-                    }
-            }
-
-            sliderHealth.value = stats.health;
-            sliderMana.value = stats.mana;
         }
 
         private IEnumerator CoroutinePlayVFX(FXSettings fXSettings)
