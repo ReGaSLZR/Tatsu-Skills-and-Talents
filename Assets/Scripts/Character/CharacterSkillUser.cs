@@ -3,7 +3,6 @@
 
     using System.Collections;
     using System.Collections.Generic;
-    using UnityEditor.Experimental.GraphView;
     using UnityEngine;
 
     public class CharacterSkillUser : MonoBehaviour
@@ -24,7 +23,7 @@
         [SerializeField]
         private Transform vfxSpawnPoint;
 
-        [Space]
+        [Header("Settings")]
 
         [SerializeField]
         private float delayOnVFXKill;
@@ -55,7 +54,8 @@
 
         public void UseSkill(Skill skill, CharacterStats stats)
         {
-            character.ApplyStatChange(TargetEffect.Damage, skill.cost.stat, (int)skill.cost.cost);
+            character.ApplyStatChange(
+                TargetEffect.Damage, skill.cost.stat, (int)skill.cost.cost);
 
             StartCoroutine(CoroutineApplyStatChangesFromSkill(
                 skill.statChangeSettings, stats));
