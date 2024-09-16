@@ -12,4 +12,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3a9b427730d104ab9271afca92b3d8, type: 3}
   m_Name: Sample Skills
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - basicInfo:
+      id: power-stab
+      name: Power Stab
+      description: Use some mana to powerfully jab your sword directly in front of
+        you and deal great damage.
+    cost:
+      stat: 0
+      cost: 5
+    coolDownInSeconds: 2
+    mobilitySettings:
+      type: 0
+      range: 0
+      speed: 0
+      delay: 0
+    statChangeSettings:
+      targetSettings:
+        mode: 0
+        stat: 1
+        effect: 0
+        range: 3
+        valueDealtToTarget: 10
+        delayDealValue: 1
+      projectileSettings:
+        prefab: {fileID: 0}
+        spawnCount: 0
+        spawnInterval: 0
+        targetHitVFX: {fileID: 0}
+    fxOnUse:
+      SFX: {fileID: 8300000, guid: 2cd91c6fc00988845a123cf144add053, type: 3}
+      delaySFX: 0.5
+      VFX: {fileID: 1575030420655730164, guid: 4fd1192fed22764439784c0de5289dd2, type: 3}
+      delayVFX: 0
+    animationState: Attack3
+  - basicInfo:
+      id: circle-slash
+      name: Circle Slash
+      description: Fiercely attack all who are around you at the cost of a little
+        of your own health.
+    cost:
+      stat: 1
+      cost: 10
+    coolDownInSeconds: 4
+    mobilitySettings:
+      type: 0
+      range: 0
+      speed: 0
+      delay: 0
+    statChangeSettings:
+      targetSettings:
+        mode: 1
+        stat: 1
+        effect: 0
+        range: 1.5
+        valueDealtToTarget: 20
+        delayDealValue: 0.5
+      projectileSettings:
+        prefab: {fileID: 0}
+        spawnCount: 0
+        spawnInterval: 0
+        targetHitVFX: {fileID: 0}
+    fxOnUse:
+      SFX: {fileID: 8300000, guid: d984d8c34c6991b4c993368beb4c30ac, type: 3}
+      delaySFX: 0.5
+      VFX: {fileID: 9019364361755337879, guid: 75b04404702d53d4ca5aab2f368629c6, type: 3}
+      delayVFX: 0
+    animationState: Attack4
+  - basicInfo:
+      id: heal-thyself
+      name: Heal Thyself
+      description: Channel some of your mana to regain a bit of health.
+    cost:
+      stat: 0
+      cost: 5
+    coolDownInSeconds: 1
+    mobilitySettings:
+      type: 0
+      range: 0
+      speed: 0
+      delay: 0
+    statChangeSettings:
+      targetSettings:
+        mode: 2
+        stat: 1
+        effect: 1
+        range: 0
+        valueDealtToTarget: 10
+        delayDealValue: 1
+      projectileSettings:
+        prefab: {fileID: 0}
+        spawnCount: 0
+        spawnInterval: 0
+        targetHitVFX: {fileID: 0}
+    fxOnUse:
+      SFX: {fileID: 8300000, guid: ee979b3d7b2410d42a116708da7f0a32, type: 3}
+      delaySFX: 0
+      VFX: {fileID: 8407742557328332224, guid: 97b33049d99708a4f989fe198cd415a0, type: 3}
+      delayVFX: 0
+    animationState: PowerUp

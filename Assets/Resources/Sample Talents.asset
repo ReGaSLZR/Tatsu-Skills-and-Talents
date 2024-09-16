@@ -12,4 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d377a445a84ab4fb614334bb9602a4, type: 3}
   m_Name: Sample Talents
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - basicInfo:
+      id: murderous-intent
+      name: Murderous Intent
+      description: Boosts skill range by 300%.
+    costReductionPercent: 0
+    cooldownReductionPercent: 0
+    valueDealtIncreasePercent: 0
+    additionalProjectileCount: 0
+    rangeIncreasePercent: 300
+    fxOnUse:
+      SFX: {fileID: 8300000, guid: 2f7210c008f073744bd8f18aa55543a5, type: 3}
+      delaySFX: 0
+      VFX: {fileID: 451663332801880220, guid: 02e71dbd4878e2741bcabe0e1c02b8b5, type: 3}
+      delayVFX: 0
+    fxMode: 1
+  - basicInfo:
+      id: fleetfooted-fighter
+      name: Fleetfooted fighter
+      description: Dramatically reduces skill cooldown time by 50%.
+    costReductionPercent: 0
+    cooldownReductionPercent: 50
+    valueDealtIncreasePercent: 0
+    additionalProjectileCount: 0
+    rangeIncreasePercent: 0
+    fxOnUse:
+      SFX: {fileID: 0}
+      delaySFX: 0
+      VFX: {fileID: 0}
+      delayVFX: 0
+    fxMode: 0
